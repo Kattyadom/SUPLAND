@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Supland | Administración</title>
+        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/conexiones.css">
+        <link rel="stylesheet" href="css/admin.css">
+        <link rel="stylesheet" href="css/tienda.css">
+    </head>
+    <body>
+        <div class="promo">✦ ENVÍO GRATIS EN PEDIDOS DE $50 ✦ <span>La diversión va por nuestra cuenta</span>
+        </div>
+        <header>
+            <a class="logo" href="home.html#inicio">
+                <i>S</i>upland<b>.</b>
+            </a>
+            <button class="hamb" aria-label="Abrir menú" aria-controls="site-navigation" aria-expanded="false">☰</button>
+            <nav id="site-navigation" aria-label="Navegación principal">
+                <div class="drop">
+                    <a href="productos.html">Catálogo⌄</a>
+                    <div class="mega">
+                        <a href="productos.html">🚀 Ciencia y espacio</a>
+                        <a href="productos.html">🎨 Arte y creatividad</a>
+                        <a href="productos.html">🧩 Juegos y retos</a>
+                        <a href="productos.html">🧸 Peluches y amigos</a>
+                    </div>
+                </div>
+                <a href="home.html#edades">Por edades</a>
+                <a href="home.html#novedades">Novedades</a>
+                <a href="home.html#nosotros">Sobre nosotros</a>
+                <a class="delivery" href="delivery.html">Delivery ↗</a>
+            </nav>
+            <button class="bag" aria-label="Ver bolsa">Bolsa <b id="count">0</b>
+            </button>
+        </header>
+        <main class="admin-main">
+            <section id="access" class="access-panel" hidden>
+                <h1 id="access-title">Administración</h1>
+                <form id="access-form">
+                    <label>Correo del administrador<input name="email" type="email" autocomplete="username" required maxlength="200">
+                    </label>
+                    <label>Contraseña<input name="password" type="password" autocomplete="current-password" required minlength="10" maxlength="200">
+                    </label>
+                    <button class="action" type="submit" id="access-submit">Entrar</button>
+                </form>
+            </section>
+            <section id="workspace" hidden>
+                <div class="admin-heading">
+                    <div>
+                        <p class="eyebrow">SUPLAND</p>
+                        <h1>Administración</h1>
+                    </div>
+                    <div class="admin-actions">
+                        <a class="action" href="agregar-producto.html">
+                            <i data-lucide="plus"></i>Agregar producto</a>
+                        <button id="logout" class="icon-action" title="Cerrar sesión" aria-label="Cerrar sesión">
+                            <i data-lucide="log-out"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="metrics" aria-label="Resumen de la tienda">
+                    <div>
+                        <span>Productos activos</span>
+                        <strong id="metric-products">0</strong>
+                    </div>
+                    <div>
+                        <span>Pedidos pendientes</span>
+                        <strong id="metric-orders">0</strong>
+                    </div>
+                    <div>
+                        <span>Usuarios activos</span>
+                        <strong id="metric-users">0</strong>
+                    </div>
+                    <div>
+                        <span>Ventas entregadas</span>
+                        <strong id="metric-sales">$0.00</strong>
+                    </div>
+                </div>
+                <div class="admin-tabs" role="tablist" aria-label="Administrar">
+                    <button role="tab" aria-selected="true" aria-controls="records" data-tab="products" id="tab-products">Productos</button>
+                    <button role="tab" aria-selected="false" aria-controls="records" data-tab="orders" id="tab-orders" tabindex="-1">Compras</button>
+                    <button role="tab" aria-selected="false" aria-controls="records" data-tab="users" id="tab-users" tabindex="-1">Usuarios</button>
+                </div>
+                <div class="admin-toolbar">
+                    <label class="search-field">
+                        <i data-lucide="search"></i>
+                        <input id="search" type="search" placeholder="Buscar" aria-label="Buscar registros">
+                    </label>
+                    <select id="filter" aria-label="Filtrar por estado">
+                        <option value="">Todos los estados</option>
+                    </select>
+                    <button id="new-user" class="action" hidden>
+                        <i data-lucide="user-plus"></i>Nuevo usuario</button>
+                    <button id="refresh" class="icon-action" title="Actualizar" aria-label="Actualizar">
+                        <i data-lucide="refresh-cw"></i>
+                    </button>
+                </div>
+                <div id="records" role="tabpanel" aria-labelledby="tab-products" class="table-wrap"></div>
+                <p id="record-count" class="record-count"></p>
+            </section>
+            <p id="message" role="status" class="form-message"></p>
+            <dialog id="user-dialog">
+                <form id="user-form">
+                    <div class="dialog-heading">
+                        <h2 id="user-title">Nuevo usuario</h2>
+                        <button type="button" data-close="user-dialog" class="icon-action" title="Cerrar" aria-label="Cerrar">
+                            <i data-lucide="x"></i>
+                        </button>
+                    </div>
+                    <input name="id" type="hidden">
+                    <label>Nombre<input name="name" required maxlength="100">
+                    </label>
+                    <label>Correo<input name="email" type="email" required maxlength="200">
+                    </label>
+                    <label>Teléfono<input name="phone" type="tel" maxlength="30">
+                    </label>
+                    <label class="check-label">
+                        <input name="active" type="checkbox" checked>Usuario activo</label>
+                    <p class="form-message" id="user-message" role="status"></p>
+                    <button type="submit" class="action">
+                        <i data-lucide="save"></i>Guardar usuario</button>
+                </form>
+            </dialog>
+            <dialog id="order-dialog">
+                <div class="dialog-heading">
+                    <h2>Detalle de compra</h2>
+                    <button type="button" data-close="order-dialog" class="icon-action" title="Cerrar" aria-label="Cerrar">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+                <div id="order-detail"></div>
+            </dialog>
+            <dialog id="confirm-dialog">
+                <h2>Desactivar producto</h2>
+                <p id="confirm-text"></p>
+                <div class="admin-actions">
+                    <button type="button" data-close="confirm-dialog" class="secondary-action">Cancelar</button>
+                    <button id="confirm-action" class="action">Desactivar</button>
+                </div>
+                <p id="confirm-message" role="status"></p>
+            </dialog>
+        </main>
+        <footer class="sitefooter">
+            <div class="footgrid">
+                <div>
+                    <a class="logo light" href="home.html#inicio">
+                        <i>S</i>upland<b>.</b>
+                    </a>
+                    <p>Grandes aventuras para pequeñas personas. Juguetes que inspiran, delivery que emociona.</p>
+                    <div class="social">◎　♪　f</div>
+                </div>
+                <div>
+                    <h3>Descubre</h3>
+                    <a href="productos.html">Catálogo completo</a>
+                    <a href="home.html#novedades">Novedades</a>
+                    <a href="home.html#edades">Comprar por edad</a>
+                    <a href="productos.html">Ideas para regalar</a>
+                    <a href="admin.html">Administración</a>
+                </div>
+                <div>
+                    <h3>Te ayudamos</h3>
+                    <a href="delivery.html">Rastrear mi pedido</a>
+                    <a href="home.html#inicio">Preguntas frecuentes</a>
+                    <a href="home.html#inicio">Cambios y devoluciones</a>
+                    <a href="mailto:hola@supland.com">hola@supland.com</a>
+                </div>
+                <div class="news">
+                    <b>💌 Magia en tu buzón</b>
+                    <p>Novedades, juegos y sorpresas. Sin correos aburridos.</p>
+                    <form>
+                        <input required type="email" placeholder="Tu correo mágico">
+                        <button>→</button>
+                    </form>
+                </div>
+            </div>
+            <div class="perks">✓ Pago seguro　 ↻ Cambios fáciles　 ♻ Empaque responsable　 ☎ Atención con humanos</div>
+            <div class="copy">© 2026 Supland · Hecho con alegría y un poquito de magia</div>
+        </footer>
+        <div class="toast" role="status"></div>
+        <script src="js/lucide.js" defer></script>
+        <script src="js/api.js" defer></script>
+        <script src="js/tienda.js" defer></script>
+        <script src="js/admin.js" defer></script>
+    </body>
+</html>

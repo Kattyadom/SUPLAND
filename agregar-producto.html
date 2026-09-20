@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Supland | Agregar producto</title>
+        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/conexiones.css">
+        <link rel="stylesheet" href="css/admin.css">
+        <link rel="stylesheet" href="css/tienda.css">
+    </head>
+    <body>
+        <div class="promo">✦ ENVÍO GRATIS EN PEDIDOS DE $50 ✦ <span>La diversión va por nuestra cuenta</span>
+        </div>
+        <header>
+            <a class="logo" href="home.html#inicio">
+                <i>S</i>upland<b>.</b>
+            </a>
+            <button class="hamb" aria-label="Abrir menú" aria-controls="site-navigation" aria-expanded="false">☰</button>
+            <nav id="site-navigation" aria-label="Navegación principal">
+                <div class="drop">
+                    <a href="productos.html">Catálogo⌄</a>
+                    <div class="mega">
+                        <a href="productos.html">🚀 Ciencia y espacio</a>
+                        <a href="productos.html">🎨 Arte y creatividad</a>
+                        <a href="productos.html">🧩 Juegos y retos</a>
+                        <a href="productos.html">🧸 Peluches y amigos</a>
+                    </div>
+                </div>
+                <a href="home.html#edades">Por edades</a>
+                <a href="home.html#novedades">Novedades</a>
+                <a href="home.html#nosotros">Sobre nosotros</a>
+                <a class="delivery" href="delivery.html">Delivery ↗</a>
+            </nav>
+            <button class="bag" aria-label="Ver bolsa">Bolsa <b id="count">0</b>
+            </button>
+        </header>
+        <main class="admin-main">
+            <div class="admin-heading">
+                <div>
+                    <a href="admin.html">← Administración</a>
+                    <h1 id="product-heading">Agregar producto</h1>
+                </div>
+                <a href="productos.html" class="secondary-action">Ver catálogo</a>
+            </div>
+            <p id="message" role="status" class="form-message"></p>
+            <form id="product-form" class="product-editor" hidden>
+                <div class="product-fields">
+                    <h2>Información del producto</h2>
+                    <label>Nombre<input name="name" required maxlength="100" autocomplete="off">
+                    </label>
+                    <label>Descripción<textarea name="description" required maxlength="1500" rows="5"></textarea>
+                    </label>
+                    <div class="field-pair">
+                        <label>Categoría<select name="category">
+                                <option>Educativos</option>
+                                <option>Creativos</option>
+                                <option>Aventura</option>
+                                <option>Peluches</option>
+                            </select>
+                        </label>
+                        <label>Precio ($)<input name="price" type="number" min="0.01" max="100000" step="0.01" required>
+                        </label>
+                    </div>
+                    <div class="field-pair">
+                        <label>Existencias<input name="stock" type="number" min="0" max="100000" step="1" required value="0">
+                        </label>
+                        <label class="check-label">
+                            <input name="active" type="checkbox" checked>Visible en el catálogo</label>
+                    </div>
+                    <fieldset class="swatches">
+                        <legend>Color de fondo</legend>
+                        <label title="Grass">
+                            <input type="radio" name="color" value="grass" checked>
+                            <span class="color-grass"></span>
+                            <span class="sr-only">Grass</span>
+                        </label>
+                        <label title="Sky">
+                            <input type="radio" name="color" value="sky">
+                            <span class="color-sky"></span>
+                            <span class="sr-only">Sky</span>
+                        </label>
+                        <label title="Candy">
+                            <input type="radio" name="color" value="candy">
+                            <span class="color-candy"></span>
+                            <span class="sr-only">Candy</span>
+                        </label>
+                        <label title="Crayon">
+                            <input type="radio" name="color" value="crayon">
+                            <span class="color-crayon"></span>
+                            <span class="sr-only">Crayon</span>
+                        </label>
+                        <label title="Sun">
+                            <input type="radio" name="color" value="sun">
+                            <span class="color-sun"></span>
+                            <span class="sr-only">Sun</span>
+                        </label>
+                        <label title="Star">
+                            <input type="radio" name="color" value="star">
+                            <span class="color-star"></span>
+                            <span class="sr-only">Star</span>
+                        </label>
+                    </fieldset>
+                    <div class="editor-actions">
+                        <a href="admin.html" class="secondary-action">Cancelar</a>
+                        <button id="save-product" type="submit" class="action">
+                            <i data-lucide="save"></i>Guardar producto</button>
+                    </div>
+                </div>
+                <div class="product-media">
+                    <h2>Imagen</h2>
+                    <div id="image-preview" class="image-preview color-grass">
+                        <span id="image-placeholder" aria-hidden="true">🎁</span>
+                        <img id="preview-image" alt="Vista previa del producto" hidden>
+                    </div>
+                    <label>Imagen del producto<input id="image-file" type="file" accept="image/png,image/jpeg,image/webp">
+                    </label>
+                    <button id="remove-image" type="button" class="secondary-action">
+                        <i data-lucide="trash-2"></i>Quitar imagen</button>
+                </div>
+            </form>
+        </main>
+        <footer class="sitefooter">
+            <div class="footgrid">
+                <div>
+                    <a class="logo light" href="home.html#inicio">
+                        <i>S</i>upland<b>.</b>
+                    </a>
+                    <p>Grandes aventuras para pequeñas personas. Juguetes que inspiran, delivery que emociona.</p>
+                    <div class="social">◎　♪　f</div>
+                </div>
+                <div>
+                    <h3>Descubre</h3>
+                    <a href="productos.html">Catálogo completo</a>
+                    <a href="home.html#novedades">Novedades</a>
+                    <a href="home.html#edades">Comprar por edad</a>
+                    <a href="productos.html">Ideas para regalar</a>
+                    <a href="admin.html">Administración</a>
+                </div>
+                <div>
+                    <h3>Te ayudamos</h3>
+                    <a href="delivery.html">Rastrear mi pedido</a>
+                    <a href="home.html#inicio">Preguntas frecuentes</a>
+                    <a href="home.html#inicio">Cambios y devoluciones</a>
+                    <a href="mailto:hola@supland.com">hola@supland.com</a>
+                </div>
+                <div class="news">
+                    <b>💌 Magia en tu buzón</b>
+                    <p>Novedades, juegos y sorpresas. Sin correos aburridos.</p>
+                    <form>
+                        <input required type="email" placeholder="Tu correo mágico">
+                        <button>→</button>
+                    </form>
+                </div>
+            </div>
+            <div class="perks">✓ Pago seguro　 ↻ Cambios fáciles　 ♻ Empaque responsable　 ☎ Atención con humanos</div>
+            <div class="copy">© 2026 Supland · Hecho con alegría y un poquito de magia</div>
+        </footer>
+        <div class="toast" role="status"></div>
+        <script src="js/lucide.js" defer></script>
+        <script src="js/api.js" defer></script>
+        <script src="js/tienda.js" defer></script>
+        <script src="js/producto.js" defer></script>
+    </body>
+</html>

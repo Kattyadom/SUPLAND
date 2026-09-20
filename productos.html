@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SUPLAND | Productos</title>
+        <!-- FUENTES -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <!-- CSS INTERNO PROFESIONAL -->
+        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/productos.css">
+        <link rel="stylesheet" href="css/conexiones.css">
+        <link rel="stylesheet" href="css/admin.css">
+        <link rel="stylesheet" href="css/tienda.css">
+    </head>
+    <body>
+        <div class="promo">✦ ENVÍO GRATIS EN PEDIDOS DE $50 ✦ <span>La diversión va por nuestra cuenta</span>
+        </div>
+        <header>
+            <a class="logo" href="home.html#inicio">
+                <i>S</i>upland<b>.</b>
+            </a>
+            <button class="hamb" aria-label="Abrir menú" aria-controls="site-navigation" aria-expanded="false">☰</button>
+            <nav id="site-navigation" aria-label="Navegación principal">
+                <div class="drop">
+                    <a href="productos.html">Catálogo⌄</a>
+                    <div class="mega">
+                        <a href="productos.html">🚀 Ciencia y espacio</a>
+                        <a href="productos.html">🎨 Arte y creatividad</a>
+                        <a href="productos.html">🧩 Juegos y retos</a>
+                        <a href="productos.html">🧸 Peluches y amigos</a>
+                    </div>
+                </div>
+                <a href="home.html#edades">Por edades</a>
+                <a href="home.html#novedades">Novedades</a>
+                <a href="home.html#nosotros">Sobre nosotros</a>
+                <a class="delivery" href="delivery.html">Delivery ↗</a>
+            </nav>
+            <button class="bag" aria-label="Ver bolsa">Bolsa <b id="count">0</b>
+            </button>
+        </header>
+        <main class="store-catalog">
+            <h1>Todos nuestros juguetes</h1>
+            <div class="store-tools">
+                <input id="catalog-search" type="search" placeholder="Buscar productos" aria-label="Buscar productos">
+                <select id="catalog-category" aria-label="Categoría">
+                    <option value="">Todas las categorías</option>
+                    <option>Educativos</option>
+                    <option>Creativos</option>
+                    <option>Aventura</option>
+                    <option>Peluches</option>
+                </select>
+            </div>
+            <div class="store-grid" data-store-grid=""></div>
+        </main>
+        <footer class="sitefooter">
+            <div class="footgrid">
+                <div>
+                    <a class="logo light" href="home.html#inicio">
+                        <i>S</i>upland<b>.</b>
+                    </a>
+                    <p>Grandes aventuras para pequeñas personas. Juguetes que inspiran, delivery que emociona.</p>
+                    <div class="social">◎　♪　f</div>
+                </div>
+                <div>
+                    <h3>Descubre</h3>
+                    <a href="productos.html">Catálogo completo</a>
+                    <a href="home.html#novedades">Novedades</a>
+                    <a href="home.html#edades">Comprar por edad</a>
+                    <a href="productos.html">Ideas para regalar</a>
+                    <a href="admin.html">Administración</a>
+                </div>
+                <div>
+                    <h3>Te ayudamos</h3>
+                    <a href="delivery.html">Rastrear mi pedido</a>
+                    <a href="home.html#inicio">Preguntas frecuentes</a>
+                    <a href="home.html#inicio">Cambios y devoluciones</a>
+                    <a href="mailto:hola@supland.com">hola@supland.com</a>
+                </div>
+                <div class="news">
+                    <b>💌 Magia en tu buzón</b>
+                    <p>Novedades, juegos y sorpresas. Sin correos aburridos.</p>
+                    <form>
+                        <input required type="email" placeholder="Tu correo mágico">
+                        <button>→</button>
+                    </form>
+                </div>
+            </div>
+            <div class="perks">✓ Pago seguro　 ↻ Cambios fáciles　 ♻ Empaque responsable　 ☎ Atención con humanos</div>
+            <div class="copy">© 2026 Supland · Hecho con alegría y un poquito de magia</div>
+        </footer>
+        <div class="toast" role="status"></div>
+        <script src="js/lucide.js" defer></script>
+        <script src="js/api.js" defer></script>
+        <script src="js/tienda.js" defer></script>
+    </body>
+</html>

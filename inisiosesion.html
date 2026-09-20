@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Supland | Iniciar Sesión</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="login.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body class="deliveryPage">
+
+  <!-- BANNER PROMO SUPERIOR -->
+  <div class="promo">
+    ¡ENVÍO GRATIS EN COMPRAS MAYORES A $35! <span>🚀 Entrega rápida a todo el país</span>
+  </div>
+
+  <!-- NAVBAR / HEADER -->
+  <header>
+    <a class="logo" href="index.html"><i>S</i>upland<b>.</b></a>
+    <a class="back" href="index.html">← Volver a la tienda</a>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL DE DOS COLUMNAS -->
+  <main class="deliveryMain">
+    
+    <!-- Columna Izquierda -->
+    <section class="deliveryIntro">
+     
+      <h1>Tu espacio de<br><em>imaginación.</em></h1>
+      <p>Guarda tus productos favoritos en la lista de deseos, realiza compras en un solo clic y accede a promociones exclusivas para miembros.</p>
+      
+
+    </section>
+
+    <!-- Columna Derecha (Tarjeta de Formulario) -->
+    <section class="deliveryPanel">
+      <div class="dtop">
+        <span>🔑</span>
+        <div>
+          <small>MI CUENTA</small>
+          <h2>Acceso de Usuarios</h2>
+        </div>
+      </div>
+
+      <div class="step active">
+        <p class="eyebrow">INICIO DE SESIÓN</p>
+        <h3>Ingresa tus datos</h3>
+
+        <form action="#" method="POST">
+          <label>Nombre Completo
+            <input type="text" placeholder="" required>
+          </label>
+
+          <label>Edad
+            <input type="number" min="1" max="120" placeholder="" required>
+          </label>
+
+          <label>Correo Electrónico
+            <input type="email" placeholder="ejemplo@correo.com" required>
+          </label>
+
+          <label>Contraseña
+            <input type="password" placeholder="" required>
+          </label>
+
+          <div class="login-options">
+            <label class="remember">
+              <input type="checkbox"> Mantener sesión
+            </label>
+            <a href="#" class="forgot">¿Recuperar clave?</a>
+          </div>
+
+          <button type="submit" class="btn full">Iniciar Sesión →</button>
+        </form>
+
+        <div class="card-footer-text">
+          ¿Aún no te has registrado? <a href="#">Crea tu cuenta</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="sitefooter">
+    <div class="footgrid">
+      <div>
+        <a class="logo light" href="#"><i>S</i>upland<b>.</b></a>
+        <p style="margin-top: 15px;">Creando momentos mágicos y diversión segura para todas las edades.</p>
+      </div>
+      <div>
+        <h3>Explorar</h3>
+        <a href="#">Juguetes</a>
+        <a href="#">Novedades</a>
+        <a href="#">Ofertas</a>
+      </div>
+      <div>
+        <h3>Ayuda</h3>
+        <a href="#">Preguntas Frecuentes</a>
+        <a href="#">Envíos Supland Express</a>
+        <a href="#">Contacto</a>
+      </div>
+      <div>
+        <h3>Boletín</h3>
+        <div class="news">
+          <p style="margin-bottom: 8px;">Recibe sorpresas y ofertas exclusivas</p>
+          <form onsubmit="return false;">
+            <input type="email" placeholder="Tu correo">
+            <button type="button">➔</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="copy">
+      © 2026 Supland. Todos los derechos reservados.
+    </div>
+  </footer>
+
+</body>
+</html>
