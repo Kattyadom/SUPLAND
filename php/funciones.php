@@ -14,11 +14,13 @@ $_SESSION['carrito'] ??= [];
 
 function h($value): string
 {
-    return htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8');
+    // Evita que el texto de un formulario se interprete como HTML.
+    return htmlspecialchars(is_scalar($value) ? (string) $value : '', ENT_QUOTES, 'UTF-8');
 }
 
 function rows(string $sql, array $values = []): array
 {
+    // Los valores van separados del SQL para no concatenar datos del usuario.
     $query = db()->prepare($sql);
     $query->execute($values);
     return $query->fetchAll();
@@ -73,7 +75,7 @@ function input(string $name, int $max = 200, bool $required = true): string
 
 function integer(string $name, int $min, int $max): int
 {
-    $value = filter_var($_POST[$name] ?? null, FILTER_VALIDATE_INT);
+    $value = filter_var($_POST[$name] ?? '', FILTER_VALIDATE_INT);
     if ($value === false || $value < $min || $value > $max) {
         throw new RuntimeException('Revisa el campo ' . $name . '.');
     }
@@ -82,6 +84,7 @@ function integer(string $name, int $min, int $max): int
 
 function cents(string $value): int
 {
+    // Calculamos en centavos para evitar errores de redondeo en las compras.
     if (!preg_match('/^\d{1,6}(?:\.\d{1,2})?$/', $value)) {
         throw new RuntimeException('El precio debe ser positivo y tener hasta dos decimales.');
     }

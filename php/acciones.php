@@ -25,7 +25,7 @@ function process_action(): void
             if (!in_array($_SERVER['REMOTE_ADDR'] ?? '', ['127.0.0.1', '::1'], true)) {
                 throw new RuntimeException('Configura al administrador desde esta computadora.');
             }
-            // Serialize the one-time administrator setup.
+            // El bloqueo evita crear dos administradores iniciales al mismo tiempo.
             $lock = rows('SELECT GET_LOCK(?, 5) AS acquired', ['supland_admin_setup'])[0];
             if ((int) $lock['acquired'] !== 1) {
                 throw new RuntimeException('La configuración está en uso. Inténtalo de nuevo.');
@@ -50,6 +50,8 @@ function process_action(): void
             }
         }
         session_regenerate_id(true);
+        $_SESSION['carrito'] = [];
+        unset($_SESSION['compra_clave']);
         $_SESSION['usuario'] = $newUserId;
         $_SESSION['csrf'] = bin2hex(random_bytes(32));
         redirect($role === 'administrador' ? 'admin.php' : 'index.php');
@@ -66,6 +68,8 @@ function process_action(): void
             throw new RuntimeException('Correo o contraseña incorrectos.');
         }
         session_regenerate_id(true);
+        $_SESSION['carrito'] = [];
+        unset($_SESSION['compra_clave']);
         $_SESSION['usuario'] = $account['id_usuario'];
         $_SESSION['csrf'] = bin2hex(random_bytes(32));
         $_SESSION['intentos'] = [];
@@ -116,11 +120,12 @@ function process_action(): void
     }
     if ($action === 'eliminar_producto') {
         require_role('administrador');
-        // Logical deletion keeps products referenced by existing sales intact.
+        // Ocultamos el producto sin borrar el historial de compras.
         execute('UPDATE productos SET activo=0 WHERE id_producto=?', [integer('id_producto', 1, PHP_INT_MAX)]);
         redirect('admin.php?eliminado=1');
     }
     if ($action === 'comprar') {
+        // Precio y stock se leen de MySQL, no de campos enviados por el navegador.
         $customer = require_role('cliente');
         $key = input('clave', 64);
         if (!hash_equals($_SESSION['compra_clave'] ?? '', $key)) {
@@ -133,6 +138,7 @@ function process_action(): void
         if (!$_SESSION['carrito']) {
             throw new RuntimeException('El carrito está vacío.');
         }
+        // Venta, detalles y stock se guardan juntos. Si falla algo, se deshacen.
         db()->beginTransaction();
         try {
             $details = [];

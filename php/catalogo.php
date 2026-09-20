@@ -31,7 +31,7 @@ function catalog_products(array $filters): array
     $sql = 'SELECT p.*,c.nombre_categoria FROM productos p JOIN categorias c USING(id_categoria) WHERE p.activo=1';
     $values = [];
     foreach (preg_split('/\s+/u', $filters['q'], -1, PREG_SPLIT_NO_EMPTY) ?: [] as $word) {
-        // Treat SQL wildcard characters as literal search text.
+        // Los signos % y _ se buscan como texto, no como comodines de SQL.
         $pattern = '%' . strtr($word, ['!' => '!!', '%' => '!%', '_' => '!_']) . '%';
         $sql .= " AND (p.nombre_producto LIKE ? ESCAPE '!' OR p.descripcion LIKE ? ESCAPE '!' OR c.nombre_categoria LIKE ? ESCAPE '!')";
         array_push($values, $pattern, $pattern, $pattern);
