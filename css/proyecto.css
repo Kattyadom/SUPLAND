@@ -208,6 +208,30 @@ input[type="radio"] {
 }
 
 /* Formularios y tablas */
+.catalog-filters {
+    background: var(--star);
+    padding: 20px 12px;
+    border-radius: 12px;
+}
+
+.home-search {
+    margin: 24px 0;
+}
+
+.home-search input {
+    min-width: 0;
+    margin: 0;
+}
+
+.agegrid .category-link b {
+    font-size: 18px;
+    overflow-wrap: anywhere;
+}
+
+.agegrid .category-link small {
+    font-size: 14px;
+}
+
 .agegrid .age-link {
     display: flex;
     flex-direction: column;

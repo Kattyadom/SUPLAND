@@ -52,7 +52,7 @@ function process_action(): void
         session_regenerate_id(true);
         $_SESSION['usuario'] = $newUserId;
         $_SESSION['csrf'] = bin2hex(random_bytes(32));
-        redirect($role === 'administrador' ? 'admin.php' : 'productos.php');
+        redirect($role === 'administrador' ? 'admin.php' : 'index.php');
     }
     if ($action === 'login') {
         $attempts = array_filter($_SESSION['intentos'] ?? [], fn($stamp) => $stamp > time() - 60);
@@ -69,7 +69,7 @@ function process_action(): void
         $_SESSION['usuario'] = $account['id_usuario'];
         $_SESSION['csrf'] = bin2hex(random_bytes(32));
         $_SESSION['intentos'] = [];
-        redirect($account['tipo_usuario'] === 'administrador' ? 'admin.php' : 'productos.php');
+        redirect($account['tipo_usuario'] === 'administrador' ? 'admin.php' : 'index.php');
     }
     if ($action === 'logout') {
         $_SESSION = [];
@@ -89,7 +89,7 @@ function process_action(): void
         } else {
             $_SESSION['carrito'][$id] = $quantity;
         }
-        redirect($action === 'agregar' ? 'productos.php?agregado=1' : 'comprar.php');
+        redirect($action === 'agregar' ? 'productos.php?' . http_build_query(array_merge(catalog_filters($_GET), ['agregado' => 1])) : 'comprar.php');
     }
     if ($action === 'guardar_producto') {
         require_role('administrador');

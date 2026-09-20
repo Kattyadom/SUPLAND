@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 require_once __DIR__ . '/funciones.php';
+require_once __DIR__ . '/catalogo.php';
 require_once __DIR__ . '/acciones.php';
 require_once __DIR__ . '/vista.php';
 
@@ -78,24 +79,7 @@ if ($error) {
         <?php if ($account && $account['tipo_usuario'] === 'cliente'): ?><a href="comprar.php">Bolsa (<?= array_sum($_SESSION['carrito']) ?>)</a><?php endif; ?>
     </div>
     <?php if (isset($_GET['agregado'])): ?><p role="status">Producto agregado a la bolsa.</p><?php endif; ?>
-    <form method="get" class="row g-3 mb-4">
-        <div class="col-sm-6"><input name="q" class="form-control" type="search" placeholder="Buscar juguetes" aria-label="Buscar juguetes" value="<?= h($_GET['q'] ?? '') ?>"></div>
-        <div class="col-sm-4"><select name="categoria" class="form-select" aria-label="Categoría"><option value="">Todas las categorías</option>
-            <?php foreach (rows('SELECT * FROM categorias') as $category): ?><option value="<?= $category['id_categoria'] ?>" <?= (string) ($category['id_categoria']) === (string) ($_GET['categoria'] ?? '') ? 'selected' : '' ?>><?= h($category['nombre_categoria']) ?></option><?php endforeach; ?>
-        </select></div>
-        <div class="col-sm-2"><button class="btn action w-100">Buscar</button></div>
-    </form>
-    <?php
-    $query = 'SELECT p.*,c.nombre_categoria FROM productos p JOIN categorias c USING(id_categoria) WHERE p.activo=1 AND p.nombre_producto LIKE ?';
-    $parameters = ['%' . (is_string($_GET['q'] ?? '') ? ($_GET['q'] ?? '') : '') . '%'];
-    if (!empty($_GET['categoria']) && is_scalar($_GET['categoria'])) {
-        $query .= ' AND p.id_categoria=?';
-        $parameters[] = $_GET['categoria'];
-    }
-    $products = rows($query . ' ORDER BY p.id_producto DESC', $parameters);
-    if (!$products) { echo '<p>No se encontraron productos.</p>'; }
-    product_cards($products, $account);
-    ?>
+    <?php require __DIR__ . '/catalogo_vista.php'; ?>
 <?php elseif ($page === 'admin'): ?>
     <div class="d-flex justify-content-between flex-wrap gap-3 mb-4"><h1>Administración de productos</h1><a class="btn action" href="agregar_producto.php">Agregar producto</a></div>
     <?php if (isset($_GET['guardado'])): ?><p role="status">Producto guardado.</p><?php endif; ?>

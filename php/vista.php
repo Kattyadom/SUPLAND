@@ -1,6 +1,15 @@
 <?php
 declare(strict_types=1);
 
+function navigation_categories(): array
+{
+    try {
+        return rows('SELECT id_categoria,nombre_categoria FROM categorias ORDER BY nombre_categoria');
+    } catch (PDOException $error) {
+        return [];
+    }
+}
+
 function header_view(string $title, ?array $account): void
 {
 ?>
@@ -20,13 +29,13 @@ function header_view(string $title, ?array $account): void
         <a class="logo" href="index.php" aria-label="Supland, inicio"><i>S</i>upland<b>.</b></a>
         <button class="hamb" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="navigation">☰</button>
         <nav id="navigation" aria-label="Navegación principal">
+            <a href="index.php">Inicio</a>
             <div class="drop">
                 <a href="productos.php">Catálogo⌄</a>
                 <div class="mega">
-                    <a href="productos.php?categoria=1">🧩 Educativos</a>
-                    <a href="productos.php?categoria=2">🎨 Creativos</a>
-                    <a href="productos.php?categoria=3">🚀 Aventura</a>
-                    <a href="productos.php?categoria=4">🧸 Peluches</a>
+                    <?php foreach (navigation_categories() as $category): ?>
+                        <a href="productos.php?categoria=<?= (int) $category['id_categoria'] ?>"><?= h($category['nombre_categoria']) ?></a>
+                    <?php endforeach; ?>
                 </div>
             </div>
             <a href="index.php#nosotros">Sobre nosotros</a>

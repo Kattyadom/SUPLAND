@@ -4,8 +4,12 @@
                     <h1>Un mundo de<br>
                         <em>¡wow!</em> en cada caja</h1>
                     <p>Juguetes que despiertan grandes ideas, aventuras y sonrisas. Elegidos con amor para pequeños exploradores.</p>
+                    <form action="productos.php" method="get" class="home-search" role="search">
+                        <label for="home-search">Encuentra tu juguete favorito</label>
+                        <div class="d-flex gap-2"><input id="home-search" class="form-control" type="search" name="q" maxlength="200" placeholder="¿Qué juguete buscas?"><button class="btn action" type="submit">Buscar</button></div>
+                    </form>
                     <div class="actions">
-                        <a class="btn" href="#catalogo">Explorar juguetes →</a>
+                        <a class="btn" href="productos.php">Explorar juguetes →</a>
                         <a class="plain" href="comprar.php">🛵 Pide y juega</a>
                     </div>
                 </div>
@@ -31,24 +35,12 @@
                 </div>
                 <?php product_cards(rows('SELECT p.*,c.nombre_categoria FROM productos p JOIN categorias c USING(id_categoria) WHERE p.activo=1 ORDER BY p.id_producto LIMIT 3'), $account); ?>
             </section>
-            <section class="ages" id="edades">
-                <div>
-                    <p class="eyebrow">ENCUENTRA EL REGALO PERFECTO</p>
-                    <h2>¿Para qué edad<br>buscamos magia?</h2>
-                </div>
+            <section class="ages" id="categorias">
+                <div><p class="eyebrow">ENCUENTRA EL REGALO PERFECTO</p><h2>Descubre juguetes<br>por categoría</h2></div>
                 <div class="agegrid">
-                    <a class="age-link" href="productos.php">🧸<b>0—2</b>
-                        <small>años</small>
-                    </a>
-                    <a class="age-link" href="productos.php">🪁<b>3—5</b>
-                        <small>años</small>
-                    </a>
-                    <a class="age-link" href="productos.php">🛹<b>6—8</b>
-                        <small>años</small>
-                    </a>
-                    <a class="age-link" href="productos.php">🧩<b>9—12</b>
-                        <small>años</small>
-                    </a>
+                    <?php foreach (navigation_categories() as $category): ?>
+                        <a class="age-link category-link" href="productos.php?categoria=<?= (int) $category['id_categoria'] ?>"><span aria-hidden="true">🎁</span><b><?= h($category['nombre_categoria']) ?></b><small>Ver juguetes →</small></a>
+                    <?php endforeach; ?>
                 </div>
             </section>
             <section class="about" id="nosotros">
