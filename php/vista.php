@@ -20,8 +20,8 @@ function header_view(string $title, ?array $account): void
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= h($title) ?> | Supland</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/proyecto.css">
+    <link rel="stylesheet" href="css/styles.css?v=<?= filemtime(__DIR__ . '/../css/styles.css') ?>">
+    <link rel="stylesheet" href="css/proyecto.css?v=<?= filemtime(__DIR__ . '/../css/proyecto.css') ?>">
 </head>
 <body>
     <div class="promo">✦ ENVÍO GRATIS EN PEDIDOS DE $50 ✦ <span>La diversión va por nuestra cuenta</span></div>
@@ -38,7 +38,7 @@ function header_view(string $title, ?array $account): void
                     <?php endforeach; ?>
                 </div>
             </div>
-            <a href="index.php#nosotros">Sobre nosotros</a>
+            <a href="nosotros.php">Sobre nosotros</a>
             <?php if (!$account): ?>
                 <a href="registro.php">Crear cuenta</a>
                 <a class="delivery" href="login.php">Iniciar sesión</a>
@@ -84,7 +84,7 @@ function footer_view(): void
             <div>
                 <h3>Te ayudamos</h3>
                 <a href="mis_compras.php">Mis compras</a>
-                <a href="index.php#nosotros">Sobre nosotros</a>
+                <a href="nosotros.php">Sobre nosotros</a>
                 <a href="mailto:hola@supland.com">hola@supland.com</a>
             </div>
             <div class="news">
@@ -108,18 +108,17 @@ function footer_view(): void
 
 function product_cards(array $products, ?array $account): void
 {
-    echo '<div class="row g-4">';
+    echo '<div class="toy-grid">';
     foreach ($products as $product) {
         $icon = [1 => '🧩', 2 => '🎨', 3 => '🚀', 4 => '🧸'][$product['id_categoria']] ?? '🎁';
         ?>
-        <div class="col-12 col-sm-6 col-lg-4">
-            <article class="toy-card h-100">
+            <article class="toy-card">
                 <div class="toy-image color-<?= h($product['color']) ?>" role="img" aria-label="<?= h($product['nombre_categoria']) ?>"><?= $icon ?></div>
-                <div class="p-4 d-flex flex-column flex-grow-1">
+                <div class="toy-content">
                     <small><?= h($product['nombre_categoria']) ?></small>
-                    <h2 class="h4 mt-2"><?= h($product['nombre_producto']) ?></h2>
-                    <p class="flex-grow-1"><?= h($product['descripcion']) ?></p>
-                    <div class="d-flex justify-content-between align-items-center gap-3">
+                    <h2 class="toy-title"><?= h($product['nombre_producto']) ?></h2>
+                    <p class="toy-description"><?= h($product['descripcion']) ?></p>
+                    <div class="toy-bottom">
                         <strong><?= money($product['precio']) ?></strong>
                         <?php if ($account && $account['tipo_usuario'] === 'cliente' && $product['cantidad'] > 0): ?>
                             <form method="post">
@@ -136,7 +135,6 @@ function product_cards(array $products, ?array $account): void
                     </div>
                 </div>
             </article>
-        </div>
         <?php
     }
     echo '</div>';

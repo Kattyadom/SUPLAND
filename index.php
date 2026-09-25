@@ -64,6 +64,7 @@ if ($error !== '') {
                         <em>Encendemos imaginación.</em>
                     </h2>
                     <p>Supland nació de una idea sencilla: cada juguete puede ser la puerta a una gran historia. Elegimos piezas seguras, duraderas y capaces de convertir cualquier tarde en una aventura.</p>
+                    <a class="btn action" href="nosotros.php">Conoce Supland →</a>
                     <div class="stats">
                         <span>
                             <b>+8K</b>familias felices</span>

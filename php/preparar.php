@@ -40,5 +40,5 @@ $titles = [
     'editar_producto' => 'Modificar producto', 'ventas' => 'Ventas',
     'usuarios' => 'Usuarios registrados', 'comprar' => 'Tu bolsa',
     'mis_compras' => 'Mis compras', 'logout' => 'Cerrar sesión',
-    'configurar' => 'Crear administrador',
+    'configurar' => 'Crear administrador', 'nosotros' => 'Sobre nosotros',
 ];
